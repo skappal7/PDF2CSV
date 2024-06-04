@@ -29,8 +29,12 @@ if pdf_files:
         # Display the file name
         st.write(f"Processing file: {file_name}")
 
+        # Save the uploaded PDF to a temporary file
+        with open(file_name, "wb") as f:
+            f.write(pdf_file.read())
+
         # Extract tables from the PDF
-        tables = camelot.read_pdf(pdf_file.read(), pages='all')
+        tables = camelot.read_pdf(file_name, pages='all')
 
         # Display the extracted tables
         st.write("Extracted Tables:")
